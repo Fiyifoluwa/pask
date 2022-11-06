@@ -20,9 +20,8 @@ const Paginator = ({ index, currentIndex }: PaginatorProps) => {
         width: 15,
         height: 3,
         borderRadius: 4,
-        margin: 8,
+        margin: 7,
         opacity,
-        // transform: [{ scale }],
       }}
     />
   );

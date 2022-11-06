@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import GlobalStyles, { colors } from 'app/design/GlobalStyles';
 import Slide from './components/Slide';
@@ -13,8 +13,12 @@ import { useScrollHandler } from 'react-native-redash';
 import { walkthroughs } from 'app/utils/data';
 import Paginator from './components/Paginator';
 import { Logo } from 'app/assets/svg';
+import { connect } from 'react-redux';
+import { getCategoriesDispatcher } from 'app/redux/cart/dispatchers';
 
-interface IWalkthrough extends INavigationProps {}
+interface IWalkthrough extends INavigationProps {
+  getCategories: () => void;
+}
 
 export const useWalkthroughStyles = () => {
   const styles = StyleSheet.create({
@@ -47,9 +51,13 @@ export const useWalkthroughStyles = () => {
   return { styles };
 };
 
-const Walkthrough = ({ navigation }: IWalkthrough) => {
+const Walkthrough = ({ navigation, getCategories }: IWalkthrough) => {
   const { styles } = useWalkthroughStyles();
   const { scrollHandler, x } = useScrollHandler();
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <Container
@@ -122,4 +130,7 @@ const Walkthrough = ({ navigation }: IWalkthrough) => {
   );
 };
 
-export default Walkthrough;
+const mapDispatchToProps = {
+  getCategories: getCategoriesDispatcher,
+};
+export default connect(undefined, mapDispatchToProps)(Walkthrough);

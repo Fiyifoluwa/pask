@@ -1,19 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CategoryItem,
   Container,
   Input,
   MainCart,
   MealItem,
+  ScrollViewH,
 } from 'app/components';
 import { H } from 'app/design/typography';
-import { Platform, ScrollView, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import GlobalStyles, { colors } from 'app/design/GlobalStyles';
+import { AppState } from 'app/redux/types';
+import { connect } from 'react-redux';
+import { getCategoryItemsDispatcher } from 'app/redux/cart/dispatchers';
+import { screenWidth } from 'app/design/responsiveModule';
 
-interface IMainScreen extends INavigationProps {}
+interface IMainScreen extends INavigationProps {
+  getCategoryItems: (category: string) => void;
+  categories: any;
+  categoryItems: any;
+}
 
-const MainScreen = ({ navigation }: IMainScreen) => {
+const MainScreen = ({
+  navigation,
+  getCategoryItems,
+  categories,
+  categoryItems,
+}: IMainScreen) => {
   const [searchInput, setSearchInput] = useState<string>();
+  const [searchCategory, setSearchCategory] = useState<string>(
+    categories[0].strCategory,
+  );
+
+  useEffect(() => {
+    getCategoryItems(searchCategory);
+  }, [searchCategory]);
+
   return (
     <Container>
       <ScrollView
@@ -65,31 +92,22 @@ const MainScreen = ({ navigation }: IMainScreen) => {
           />
         </View>
 
-        <ScrollView
-          style={{
-            flexDirection: 'row',
-            marginBottom: 24,
-          }}
-          contentInset={{
-            // for ios
-            top: 0,
-            left: 20,
-            bottom: 0,
-            right: 20,
-          }}
-          contentContainerStyle={{
-            // for android
-            paddingHorizontal: Platform.OS === 'android' ? 20 : 0,
-          }}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        >
-          <CategoryItem />
-          <CategoryItem />
-          <CategoryItem />
-          <CategoryItem />
-          <CategoryItem />
-        </ScrollView>
+        <ScrollViewH>
+          {categories.map((item: any) => (
+            <TouchableOpacity
+              key={item.idCategory}
+              onPress={() => {
+                setSearchCategory(item.strCategory);
+              }}
+              activeOpacity={0.8}
+            >
+              <CategoryItem
+                item={item}
+                selected={searchCategory === item.strCategory}
+              />
+            </TouchableOpacity>
+          ))}
+        </ScrollViewH>
 
         <View
           style={[
@@ -105,32 +123,30 @@ const MainScreen = ({ navigation }: IMainScreen) => {
           <H text={'Popular Items'} fontSize={24} style={{}} />
           <H text={'See all'} fontSize={16} style={{ opacity: 0.5 }} />
         </View>
-        <ScrollView
-          style={{
-            flexDirection: 'row',
-            marginBottom: 20,
-          }}
-          contentInset={{
-            // for ios
-            top: 0,
-            left: 20,
-            bottom: 0,
-            right: 20,
-          }}
-          contentContainerStyle={{
-            // for android
-            paddingHorizontal: Platform.OS === 'android' ? 20 : 0,
-          }}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        >
-          <TouchableOpacity onPress={() => navigation?.navigate('ItemScreen')}>
-            <MealItem />
-          </TouchableOpacity>
-          <MealItem />
-          <MealItem />
-          <MealItem />
-        </ScrollView>
+        <ScrollViewH>
+          {categoryItems.length ? (
+            categoryItems.map((item: any) => (
+              <TouchableOpacity
+                key={item.idMeal}
+                onPress={() => navigation?.navigate('ItemScreen', { item })}
+              >
+                <MealItem item={item} />
+              </TouchableOpacity>
+            ))
+          ) : (
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                width: screenWidth - 40,
+                flex: 1,
+              }}
+            >
+              <ActivityIndicator size={'large'} />
+            </View>
+          )}
+        </ScrollViewH>
 
         <View>
           <MainCart />
@@ -140,4 +156,15 @@ const MainScreen = ({ navigation }: IMainScreen) => {
   );
 };
 
-export default MainScreen;
+const mapStateToProps = (state: AppState) => {
+  return {
+    categories: state.cart.categories,
+    categoryItems: state.cart.categoryItems,
+  };
+};
+
+const mapDispatchToProps = {
+  getCategoryItems: getCategoryItemsDispatcher,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

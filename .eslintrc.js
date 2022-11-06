@@ -15,5 +15,6 @@ module.exports = {
     'unused-imports/no-unused-imports-ts': 'error',
     'unused-imports/no-unused-vars': 'off',
     'import/no-duplicates': ['error'],
+    'react-hooks/exhaustive-deps': 'off',
   },
 };

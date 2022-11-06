@@ -1,11 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { colors } from 'app/design/GlobalStyles';
 import { Body } from 'app/design/typography';
 
-interface ICategoryItem extends INavigationProps {}
+interface ICategoryItem extends INavigationProps {
+  item: any;
+  selected: boolean;
+}
 
-const CategoryItem = ({ navigation }: ICategoryItem) => {
+const CategoryItem = ({ item, selected }: ICategoryItem) => {
   return (
     <View
       style={{
@@ -13,23 +16,32 @@ const CategoryItem = ({ navigation }: ICategoryItem) => {
         justifyContent: 'center',
         width: 83,
         height: 118,
-        backgroundColor: colors.primaryColor,
+        backgroundColor: !selected ? 'transparent' : colors.primaryColor,
         marginRight: 14,
         paddingVertical: 20,
         alignItems: 'center',
         borderRadius: 24,
+        borderColor: !selected ? colors.inputBorder : colors.white,
+        borderWidth: 0.5,
       }}
     >
-      <View
+      <Image
+        source={{ uri: item.strCategoryThumb }}
         style={{
-          width: 50,
-          height: 50,
+          width: 45,
+          height: 45,
           backgroundColor: colors.orange,
-          borderRadius: 99,
-          marginBottom: 10,
+          marginBottom: 12,
+          borderRadius: 12,
         }}
       />
-      <Body text={'Fast Food'} fontSize={14} style={{ color: colors.white }} />
+      <Body
+        text={item.strCategory}
+        fontSize={14}
+        style={{ color: !selected ? colors.black : colors.white, maxWidth: 70 }}
+        ellipsizeMode={'tail'}
+        numberOfLines={1}
+      />
     </View>
   );
 };

@@ -8,6 +8,7 @@ interface INavigationProps {
     getParam: (paramName: string, defaultValue?: any) => any;
     navigate: (routeName: string, params?: any) => void;
     dispatch: (action: any) => void;
+    reset: (params: { index: number; routes: { name: string }[] }) => void;
     state: {
       routeName: string;
       key: string;

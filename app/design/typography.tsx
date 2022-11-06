@@ -19,9 +19,15 @@ interface ITypography extends TextProps {
 }
 
 const styles = StyleSheet.create({
-  text: {},
-  body: {},
-  paragraph: {},
+  text: {
+    fontFamily: 'U8-Bold',
+  },
+  body: {
+    fontFamily: 'U8-Bold',
+  },
+  paragraph: {
+    fontFamily: 'U8-Bold',
+  },
 });
 
 export const H = ({

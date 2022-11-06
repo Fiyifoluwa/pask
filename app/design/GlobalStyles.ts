@@ -48,7 +48,7 @@ export const colors = {
   primaryColor: '#539F82',
   blue: '#0860D5',
   secondaryColor: '#ECFEF3',
-  darkPrimaryColor: '#1A1C1F',
+  darkPrimaryColor: '#111111',
   darkSecondaryColor: '#EBEDEF',
   primaryTextColor: '#1A1C1F',
   secondaryTextColor: '#6C7884',
@@ -57,10 +57,11 @@ export const colors = {
   disabledTextColor: '#8C96A1',
   primaryButtontext: '#ffffff',
   white: '#FFFFFF',
+  primarySurface: '#ffffff',
   modalBackground: 'rgba(0,0,0,0.9)',
   inputBackground: 'rgba(247,247,247,1)',
   avatarBG: '#F0E9E9',
-  inputBorder: '#DDE1E9',
+  inputBorder: '#D0E0E0',
   inputDisabled: '#F6F7F9',
   tabBackground: '#F6F7F9',
   error: '#DB4343',
@@ -76,6 +77,9 @@ export const colors = {
 };
 
 export default StyleSheet.create({
+  wrapper: {
+    paddingHorizontal: 20,
+  },
   contain: {
     flex: 1,
   },
@@ -156,5 +160,12 @@ export default StyleSheet.create({
     shadowOpacity: 0.7,
     shadowRadius: 10,
     elevation: 2,
+  },
+  lastFloat: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    display: 'flex',
+    // justifyContent: 'center',
   },
 });

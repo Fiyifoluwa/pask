@@ -1,14 +1,18 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import GlobalStyles, { colors } from 'app/design/GlobalStyles';
 import Slide from './components/Slide';
-import { screenHeight, screenWidth } from 'app/design/responsiveModule';
-import { H } from 'app/design/typography';
+import {
+  getHeight,
+  screenHeight,
+  screenWidth,
+} from 'app/design/responsiveModule';
 import { Buttons, Container } from 'app/components';
 import Animated, { divide } from 'react-native-reanimated';
 import { useScrollHandler } from 'react-native-redash';
 import { walkthroughs } from 'app/utils/data';
 import Paginator from './components/Paginator';
+import { Logo } from 'app/assets/svg';
 
 interface IWalkthrough extends INavigationProps {}
 
@@ -20,22 +24,24 @@ export const useWalkthroughStyles = () => {
       ...GlobalStyles.horizontalPadding,
     },
     slider: {
-      height: 0.75 * screenHeight,
-      backgroundColor: 'black',
-    },
-    footer: {
-      flex: 1,
+      // flex: 1,
+      height: 0.45 * screenHeight,
+      backgroundColor: colors.darkPrimaryColor,
       alignItems: 'center',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      ...GlobalStyles.horizontalPadding,
+      justifyContent: 'center',
     },
     pagination: {
       height: 10,
       flexDirection: 'row',
-      ...StyleSheet.absoluteFillObject,
+      // ...StyleSheet.absoluteFillObject,
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    footer: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      ...GlobalStyles.horizontalPadding,
     },
   });
   return { styles };
@@ -43,37 +49,45 @@ export const useWalkthroughStyles = () => {
 
 const Walkthrough = ({ navigation }: IWalkthrough) => {
   const { styles } = useWalkthroughStyles();
-  const scroll = useRef<Animated.ScrollView>(null);
   const { scrollHandler, x } = useScrollHandler();
 
   return (
-    <Container statusBarColor={colors.black} backgroundColor={colors.black}>
-      <Animated.View style={styles.slider}>
-        <H text={'piggyvest'} style={{ color: 'blue', textAlign: 'center' }} />
-        <Animated.ScrollView
-          horizontal
-          snapToInterval={screenWidth}
-          decelerationRate="fast"
-          showsHorizontalScrollIndicator={false}
-          bounces={false}
-          {...scrollHandler}
-        >
-          {walkthroughs.map(({ text, illustration }, i) => (
-            <Slide key={i} {...{ text, illustration }} />
-          ))}
-        </Animated.ScrollView>
-      </Animated.View>
-
+    <Container
+      statusBarColor={colors.darkPrimaryColor}
+      backgroundColor={colors.darkPrimaryColor}
+    >
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
-        <View style={styles.pagination}>
-          {walkthroughs.map((_, index) => (
-            <Paginator
-              key={index}
-              currentIndex={divide(x, screenWidth)}
-              {...{ index }}
-            />
-          ))}
+        <View style={{ alignItems: 'center' }}>
+          <Logo width={screenWidth * 0.45} height={getHeight(60)} />
         </View>
+
+        <View style={styles.slider}>
+          <View>
+            <Animated.ScrollView
+              horizontal
+              snapToInterval={screenWidth}
+              decelerationRate="fast"
+              showsHorizontalScrollIndicator={false}
+              bounces={false}
+              {...scrollHandler}
+            >
+              {walkthroughs.map(({ text, illustration }, i) => (
+                <Slide key={i} {...{ text, illustration }} />
+              ))}
+            </Animated.ScrollView>
+          </View>
+
+          <View style={styles.pagination}>
+            {walkthroughs.map((_, index) => (
+              <Paginator
+                key={index}
+                currentIndex={divide(x, screenWidth)}
+                {...{ index }}
+              />
+            ))}
+          </View>
+        </View>
+
         <View style={styles.footer}>
           <Buttons
             variant="primary"
@@ -85,6 +99,12 @@ const Walkthrough = ({ navigation }: IWalkthrough) => {
               borderBottomLeftRadius: 3,
             }}
             textStyle={{ fontWeight: '600' }}
+            onPress={() => {
+              navigation?.reset({
+                index: 0,
+                routes: [{ name: 'MainScreen' }],
+              });
+            }}
           />
           <Buttons
             variant="outline"

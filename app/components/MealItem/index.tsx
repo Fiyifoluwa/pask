@@ -1,11 +1,13 @@
 import React from 'react';
 import { Body, H } from 'app/design/typography';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { colors } from 'app/design/GlobalStyles';
 
-interface IMealItem extends INavigationProps {}
+interface IMealItem extends INavigationProps {
+  item: any;
+}
 
-const MealItem = ({ navigation }: IMealItem) => {
+const MealItem = ({ navigation, item }: IMealItem) => {
   return (
     <View
       style={{
@@ -19,20 +21,26 @@ const MealItem = ({ navigation }: IMealItem) => {
       }}
     >
       <View style={{ alignItems: 'center', marginBottom: 16 }}>
-        <H text={'Melting Cheese Pizza'} style={{ marginBottom: 10 }} />
+        <H
+          text={item.strMeal}
+          style={{ marginBottom: 10, maxWidth: 220 }}
+          ellipsizeMode={'tail'}
+          numberOfLines={1}
+        />
         <View style={{ flexDirection: 'row' }}>
           <H text={'$ '} style={{ color: colors.primaryColor }} />
           <H text={'9.99'} />
         </View>
       </View>
-      <View
+
+      <Image
+        source={{ uri: item.strMealThumb }}
         style={{
           width: 120,
           height: 120,
-          backgroundColor: colors.orange,
+          marginBottom: 12,
           borderRadius: 99,
           alignSelf: 'center',
-          marginBottom: 24,
         }}
       />
       <View

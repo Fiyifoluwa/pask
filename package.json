@@ -5,10 +5,11 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "ios-14": "react-native run-ios --simulator=\"iPhone 14 Pro\""
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.7",

@@ -1,12 +1,30 @@
-import React from 'react';
-import { Buttons, CategoryItem, Container } from 'app/components';
+import React, { useState } from 'react';
+import { Buttons, Container, PriceItem } from 'app/components';
 import { H, P } from 'app/design/typography';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import GlobalStyles, { colors } from 'app/design/GlobalStyles';
 
 interface IItemScreen extends INavigationProps {}
 
-const ItemScreen = ({ navigation }: IItemScreen) => {
+const priceItems = [
+  {
+    size: 'Small 8"',
+    price: '$9.99',
+  },
+  {
+    size: 'Medium 12"',
+    price: '$12.99',
+  },
+  {
+    size: 'Large 18"',
+    price: '$16.99',
+  },
+];
+
+const ItemScreen = ({ navigation, route }: IItemScreen) => {
+  const { item } = route?.params;
+  const [selected, setSelected] = useState(priceItems[1].size);
+
   return (
     <Container
       statusBarColor={colors.primaryColor}
@@ -30,47 +48,78 @@ const ItemScreen = ({ navigation }: IItemScreen) => {
         }}
       >
         <TouchableOpacity onPress={() => navigation?.goBack()}>
-          <H text={'back'} style={{ color: colors.white }} />
+          <H text={'🔙'} style={{ color: colors.white }} />
         </TouchableOpacity>
-        <H text={'fav'} style={{ color: colors.white }} />
+        <H text={'❤️'} style={{ color: colors.white }} />
       </View>
 
-      <View
+      <Image
+        source={{ uri: item.strMealThumb }}
         style={{
-          backgroundColor: colors.orange,
-          borderRadius: 99,
           height: 190,
           width: 190,
+          marginBottom: 32,
+          borderRadius: 99,
           alignSelf: 'center',
         }}
       />
 
       <View style={{ alignItems: 'center' }}>
-        <H text={'Melting Cheese Pizza'} style={{ color: colors.black }} />
-        <H text={'🍕 Pizza Italiano'} style={{ color: colors.black }} />
-        <View style={{ ...GlobalStyles.alignItemsRow }}>
+        <H
+          text={item.strMeal}
+          style={{ color: colors.black, marginBottom: 16 }}
+        />
+        <H
+          text={'🍕 Pizza Italiano'}
+          style={{ color: colors.black, marginBottom: 12 }}
+        />
+        <View style={{ ...GlobalStyles.alignItemsRow, marginBottom: 20 }}>
           <H text={'🕥 15 min'} style={{ color: colors.black }} />
           <H
             text={'●'}
             style={{ color: colors.black, opacity: 0.5, marginBottom: -5 }}
             fontSize={12}
           />
-          <H text={'⭐️ 4.8 (2.2k reviews)'} style={{ color: colors.black }} />
-          <H text={'  caret right'} style={{ color: colors.black }} />
+          <H text={'⭐️ 4.8 '} style={{ color: colors.black }} />
+          <H
+            text={'(2.2k reviews)'}
+            style={{ color: colors.disabledTextColor }}
+          />
+          <H
+            text={' ›'}
+            fontSize={28}
+            style={{ color: colors.disabledTextColor }}
+          />
         </View>
       </View>
 
-      <View style={{ ...GlobalStyles.alignItemsRow, alignSelf: 'center' }}>
-        <CategoryItem />
-        <CategoryItem />
-        <CategoryItem />
+      <View
+        style={{
+          ...GlobalStyles.alignItemsRow,
+          alignSelf: 'center',
+          marginBottom: 20,
+        }}
+      >
+        {priceItems.map(value => (
+          <TouchableOpacity
+            key={value.size}
+            onPress={() => {
+              setSelected(value.size);
+            }}
+            activeOpacity={0.8}
+          >
+            <PriceItem item={value} selected={selected === value.size} />
+          </TouchableOpacity>
+        ))}
       </View>
 
       <View style={{ ...GlobalStyles.wrapper, alignSelf: 'center', flex: 1 }}>
         <P
           text={
-            'hgjdvfgkdvkshgvdkshjgdavkdgavdkhagsdvsadghskdvsgdcsdsds ds dsgdkvsyudvskd sdsudjvlshjgdgvsldhjsvd sdskudvksdhjsd sdf def fd fd f df dfjkghdvfydgfbdfs fdhjfshjfbs fdfdfgblhfbs...More'
+            'hgjdvfg kdvkshg vdkshjgd avkdg avdkhagsd vsadghsk dvsgdc sdsds ds dsgdkvsyudvskd sdsudjvls hjgdgvsldhjsvd sdskudvksd hjsd sdf def fd fd f df dfjkgh dvfydgfbdfs fdhjfshjfbs fdfdfgblhfbs...More'
           }
+          fontSize={16}
+          lineHeight={28}
           textAlign={'center'}
         />
       </View>

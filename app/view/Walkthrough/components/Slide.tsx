@@ -14,7 +14,6 @@ const Slide = ({ text, illustration }: ISlide) => {
     <View
       style={{
         width: screenWidth,
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
       }}
@@ -23,11 +22,13 @@ const Slide = ({ text, illustration }: ISlide) => {
       <View style={{ maxWidth: screenWidth * 0.7 }}>
         <H
           {...{ text }}
+          fontSize={24}
+          lineHeight={30}
           style={{
             color: colors.primaryButtontext,
             textAlign: 'center',
             fontWeight: '600',
-            marginTop: 60,
+            marginTop: 30,
           }}
         />
       </View>

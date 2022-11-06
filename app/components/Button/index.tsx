@@ -17,7 +17,7 @@ interface IGenericButtonProps extends TouchableOpacityProps {
   children?: any;
 }
 
-export const BUTTON_HEIGHT = 50;
+export const BUTTON_HEIGHT = 55;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.fillCenter,
   },
   buttonText: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: '500',
   },
 });
@@ -87,7 +87,7 @@ const OutlineButton = ({
       style={[
         styles.wrapper,
         {
-          backgroundColor: colors.primarySurface,
+          backgroundColor: 'transparent',
           borderColor: disabled ? colors.inputBorder : colors.white,
           borderWidth: 0.5,
           opacity: disabled ? 0.5 : 1,

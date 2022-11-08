@@ -42,9 +42,9 @@
 		4872BB1822A7E64F4A69224E /* Pods-pask-paskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pask-paskTests.release.xcconfig"; path = "Target Support Files/Pods-pask-paskTests/Pods-pask-paskTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = pask/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DE8BD6DA0B0DE6D08D27CF9 /* Pods-pask-paskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pask-paskTests.debug.xcconfig"; path = "Target Support Files/Pods-pask-paskTests/Pods-pask-paskTests.debug.xcconfig"; sourceTree = "<group>"; };
-		A86A2AB60C014AD0A68A0EA5 /* U8-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "U8-Bold.ttf"; path = "../app/assets/fonts/U8-Bold.ttf"; sourceTree = "<group>"; };
+		A86A2AB60C014AD0A68A0EA5 /* U8-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "U8-Bold.ttf"; path = "../app/assets/fonts/U8-Bold.ttf"; sourceTree = "<group>"; };
 		C10A592208921AE58BC58D70 /* Pods-pask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pask.debug.xcconfig"; path = "Target Support Files/Pods-pask/Pods-pask.debug.xcconfig"; sourceTree = "<group>"; };
-		D7A97CB2C2E64F03A043126C /* qkBbXvYC6trAT7RVLtw.woff2 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = qkBbXvYC6trAT7RVLtw.woff2; path = ../app/assets/fonts/qkBbXvYC6trAT7RVLtw.woff2; sourceTree = "<group>"; };
+		D7A97CB2C2E64F03A043126C /* qkBbXvYC6trAT7RVLtw.woff2 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = qkBbXvYC6trAT7RVLtw.woff2; path = ../app/assets/fonts/qkBbXvYC6trAT7RVLtw.woff2; sourceTree = "<group>"; };
 		E22841FF8117462F5E2A91E3 /* libPods-pask.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pask.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6616C34A88450E541E47A9C /* Pods-pask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pask.release.xcconfig"; path = "Target Support Files/Pods-pask/Pods-pask.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -117,7 +117,6 @@
 				D7A97CB2C2E64F03A043126C /* qkBbXvYC6trAT7RVLtw.woff2 */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {

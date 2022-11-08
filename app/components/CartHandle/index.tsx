@@ -12,10 +12,10 @@ const CartHandle = ({}: ICartHandle) => {
         style={{
           backgroundColor: colors.inputBorder,
           borderRadius: 5,
-          width: 55,
+          width: 40,
           height: 2.5,
           position: 'absolute',
-          right: 21.5,
+          right: 19,
           bottom: 8,
         }}
       />

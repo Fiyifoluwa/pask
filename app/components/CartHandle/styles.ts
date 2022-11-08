@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   handle: {
     backgroundColor: colors.white,
     position: 'relative',
-    width: 100,
+    width: 80,
     height: 20,
     borderRadius: 99,
   },

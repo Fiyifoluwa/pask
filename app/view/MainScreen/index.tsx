@@ -144,6 +144,7 @@ const MainScreen = ({
           style={{
             ...GlobalStyles.wrapper,
             ...GlobalStyles.lastFloat,
+            ...styles.cartBg,
           }}
         >
           <MainCart cart={cart} />

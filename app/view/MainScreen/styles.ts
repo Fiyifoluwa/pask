@@ -30,4 +30,5 @@ export const styles = StyleSheet.create({
     width: screenWidth - 40,
     flex: 1,
   },
+  cartBg: { backgroundColor: colors.white, paddingVertical: 8 },
 });

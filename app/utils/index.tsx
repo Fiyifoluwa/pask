@@ -28,3 +28,18 @@ export const walkthroughs = [
     ),
   },
 ];
+
+export const priceItems = [
+  {
+    size: 'Small 8"',
+    price: '$9.99',
+  },
+  {
+    size: 'Medium 12"',
+    price: '$12.99',
+  },
+  {
+    size: 'Large 18"',
+    price: '$16.99',
+  },
+];

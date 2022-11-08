@@ -1,5 +1,6 @@
 import React from 'react';
 import Animated, { interpolateNode } from 'react-native-reanimated';
+import { styles } from './styles';
 
 interface PaginatorProps {
   index: number;
@@ -13,18 +14,7 @@ const Paginator = ({ index, currentIndex }: PaginatorProps) => {
     extrapolate: 'clamp',
   });
 
-  return (
-    <Animated.View
-      style={{
-        backgroundColor: '#fff',
-        width: 15,
-        height: 3,
-        borderRadius: 4,
-        margin: 7,
-        opacity,
-      }}
-    />
-  );
+  return <Animated.View style={{ ...styles.paginator, opacity }} />;
 };
 
 export default Paginator;

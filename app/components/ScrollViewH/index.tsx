@@ -1,17 +1,24 @@
 import React, { ReactNode } from 'react';
 
-import { Platform, ScrollView } from 'react-native';
+import { Platform, ScrollView, ViewStyle } from 'react-native';
 
 interface IScrollViewH extends INavigationProps {
   children: ReactNode;
+  style?: ViewStyle;
+  contentContainerStyle?: ViewStyle;
 }
 
-const ScrollViewH = ({ children }: IScrollViewH) => {
+const ScrollViewH = ({
+  children,
+  style,
+  contentContainerStyle,
+}: IScrollViewH) => {
   return (
     <ScrollView
       style={{
         flexDirection: 'row',
         marginBottom: 24,
+        ...style,
       }}
       // pagingEnabled
       contentInset={{
@@ -24,6 +31,7 @@ const ScrollViewH = ({ children }: IScrollViewH) => {
       contentContainerStyle={{
         // for android
         paddingHorizontal: Platform.OS === 'android' ? 20 : 0,
+        ...contentContainerStyle,
       }}
       horizontal
       showsHorizontalScrollIndicator={false}

@@ -1,31 +1,31 @@
 import React from 'react';
 import {
   TextInput,
-  StyleSheet,
   View,
   GestureResponderEvent,
   TextStyle,
   TouchableOpacity,
   TextInputProps,
-  Text,
 } from 'react-native';
 import { colors } from 'app/design/GlobalStyles';
+import { styles } from './styles';
+import { Options, Search } from 'app/assets/svg';
 
 interface InputProps {
-  height?: number;
   value: string | number | any;
   placeholder: string | number | any;
-  placeholderTextColor?: string;
   textInputStyle?: TextStyle;
   containerStyle?: TextStyle;
   props?: TextInputProps;
   onChangeText: (arg: string) => void;
   rightIconPress?: (event: GestureResponderEvent) => void;
   rightIcon?: boolean;
+  leftIcon?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
   rightIcon,
+  leftIcon,
   value,
   textInputStyle,
   containerStyle,
@@ -34,31 +34,18 @@ const Input: React.FC<InputProps> = ({
   onChangeText,
   rightIconPress,
 }) => {
-  const styles = StyleSheet.create({
-    inputContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      borderRadius: 20,
-      backgroundColor: colors.white,
-      paddingVertical: 8,
-      paddingHorizontal: 24,
-      height: 55,
-      color: colors.black,
-      borderWidth: 0.5,
-      borderColor: colors.inputBorder,
-    },
-    textInput: {
-      fontFamily: 'U8-Bold',
-      color: colors.black,
-      width: '100%',
-      height: 55,
-      // flex: 1,
-    },
-  });
-
   return (
     <View>
       <View style={[styles.inputContainer, containerStyle]}>
+        {leftIcon && (
+          <TouchableOpacity
+            style={{ marginRight: 10 }}
+            onPress={rightIconPress}
+            activeOpacity={1}
+          >
+            <Search width={20} height={20} fill={colors.black} />
+          </TouchableOpacity>
+        )}
         <TextInput
           style={[styles.textInput, textInputStyle]}
           onChangeText={onChangeText}
@@ -66,21 +53,17 @@ const Input: React.FC<InputProps> = ({
           placeholder={placeholder}
           placeholderTextColor={colors.disabledTextColor}
           keyboardAppearance="dark"
-          // // @ts-ignore
-          // onChangeText={(text: String) => onChange(name)(text)}
           {...props}
         />
         {rightIcon && (
           <TouchableOpacity
             style={{ marginLeft: 'auto' }}
             onPress={rightIconPress}
+            activeOpacity={0.7}
           >
-            <Text style={[{ color: colors.disabledTextColor }]}>
-              {/* {secureTextEntry ? 'Show' : 'Hide'} */}
-            </Text>
+            <Options width={25} height={25} fill={colors.black} />
           </TouchableOpacity>
         )}
-        {/* {rightCaret && <CaretRight />} */}
       </View>
     </View>
   );

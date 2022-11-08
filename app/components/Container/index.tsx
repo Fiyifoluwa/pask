@@ -1,11 +1,11 @@
 import { colors } from 'app/design/GlobalStyles';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { StatusBar, KeyboardAvoidingView, Platform, View } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface IContainer {
-  children: any;
+  children: ReactNode;
   backgroundColor?: string;
   statusBarColor?: string;
 }
@@ -35,7 +35,7 @@ const Container = ({
         <KeyboardAvoidingView
           {...{ ...(Platform.OS === 'ios' && { behavior: 'padding' }) }}
           enabled
-          style={{ flex: 1 }}
+          style={{ flex: 1, paddingVertical: 10 }}
         >
           {children}
         </KeyboardAvoidingView>

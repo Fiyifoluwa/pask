@@ -10,7 +10,7 @@ import GlobalStyles, { colors } from 'app/design/GlobalStyles';
 
 interface IGenericButtonProps extends TouchableOpacityProps {
   buttonText?: string;
-  variant?: 'primary' | 'outline' | 'noborder';
+  variant?: 'primary' | 'outline';
   textStyle?: any;
   buttonStyle?: any;
   textColor?: string;
@@ -114,53 +114,11 @@ const OutlineButton = ({
   );
 };
 
-const NoBorderButton = ({
-  buttonText,
-  onPress,
-  buttonStyle,
-  textStyle,
-  textColor,
-  children,
-  disabled,
-  ...rest
-}: IGenericButtonProps) => {
-  return (
-    <TouchableOpacity
-      style={[
-        styles.wrapper,
-        {
-          backgroundColor: colors.primarySurface,
-          ...buttonStyle,
-          opacity: disabled ? 0.5 : 1,
-        },
-      ]}
-      onPress={onPress}
-      disabled={disabled}
-      activeOpacity={0.8}
-      {...rest}
-    >
-      {children ? (
-        children
-      ) : (
-        <View style={GlobalStyles.alignItemsRow}>
-          <Body
-            fontSize={14}
-            text={buttonText}
-            style={{ color: textColor, ...textStyle }}
-          />
-        </View>
-      )}
-    </TouchableOpacity>
-  );
-};
-
 const GenericButton = (props: IGenericButtonProps) => {
   return props.variant === 'primary' ? (
     <PrimaryButton {...props} />
-  ) : props.variant === 'outline' ? (
-    <OutlineButton {...props} />
   ) : (
-    <NoBorderButton {...props} />
+    <OutlineButton {...props} />
   );
 };
 

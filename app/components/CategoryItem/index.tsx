@@ -2,9 +2,11 @@ import React from 'react';
 import { Image, View } from 'react-native';
 import { colors } from 'app/design/GlobalStyles';
 import { Body } from 'app/design/typography';
+import { styles } from './styles';
+import { TCategory } from 'app/types';
 
-interface ICategoryItem extends INavigationProps {
-  item: any;
+interface ICategoryItem {
+  item: TCategory;
   selected: boolean;
 }
 
@@ -12,29 +14,12 @@ const CategoryItem = ({ item, selected }: ICategoryItem) => {
   return (
     <View
       style={{
-        // flex: 1,
-        justifyContent: 'center',
-        width: 83,
-        height: 118,
+        ...styles.container,
         backgroundColor: !selected ? 'transparent' : colors.primaryColor,
-        marginRight: 14,
-        paddingVertical: 20,
-        alignItems: 'center',
-        borderRadius: 24,
         borderColor: !selected ? colors.inputBorder : colors.white,
-        borderWidth: 0.5,
       }}
     >
-      <Image
-        source={{ uri: item.strCategoryThumb }}
-        style={{
-          width: 45,
-          height: 45,
-          backgroundColor: colors.orange,
-          marginBottom: 12,
-          borderRadius: 12,
-        }}
-      />
+      <Image source={{ uri: item.strCategoryThumb }} style={styles.imgStyle} />
       <Body
         text={item.strCategory}
         fontSize={14}

@@ -1,4 +1,5 @@
 import {
+  AddToCart,
   CartActions,
   CartState,
   CART_ACTION_TYPES as actionType,
@@ -14,16 +15,9 @@ export const initialState: CartState = {
 };
 
 const ACTIONS: any = {
-  [actionType.CLEAR_REDUX_STORE]: (
-    state: CartState,
-    // {}: ClearCart
-  ) => ({
-    ...state,
-    // user: { ...state.user, user: { ...state?.user?.user, ...brassUser } },
-  }),
-
   [actionType.CLEAR_CART]: (state: CartState) => ({
     ...state,
+    cart: [],
     requestStatus: 'idle',
   }),
 
@@ -67,6 +61,32 @@ const ACTIONS: any = {
     ...state,
     requestStatus: 'failed',
   }),
+
+  [actionType.ADD_TO_CART]: (state: CartState, { item }: AddToCart) => {
+    if (state.cart?.length) {
+      const found = state.cart.find(items => items.idMeal === item.idMeal);
+
+      if (found) {
+        state.cart.splice(state.cart.indexOf(found), 1, {
+          ...found,
+          quantity: found.quantity + 1,
+        });
+
+        return {
+          ...state,
+          cart: [...state.cart],
+        };
+      }
+      return {
+        ...state,
+        cart: [...state.cart, { ...item, quantity: 1 }],
+      };
+    }
+    return {
+      ...state,
+      cart: [{ ...item, quantity: 1 }],
+    };
+  },
 };
 
 export const cartReducer = (state = initialState, action: CartActions) => {

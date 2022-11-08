@@ -13,7 +13,7 @@ const WalkthroughItem = ({ text, illustration }: IWalkthroughItem) => {
   return (
     <View style={styles.container}>
       {illustration}
-      <View style={{ maxWidth: screenWidth * 0.7 }}>
+      <View style={{ maxWidth: screenWidth * 0.75 }}>
         <H {...{ text }} fontSize={24} lineHeight={30} style={styles.text} />
       </View>
     </View>

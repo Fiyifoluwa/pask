@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 interface ITypography extends TextProps {
-  text: string | Element | null | ReactNode;
+  text: string | null | ReactNode;
   fontSize?: number;
   style?: StyleProp<TextStyle>;
   fontWeight?: string;
